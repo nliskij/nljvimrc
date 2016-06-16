@@ -9,6 +9,8 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
@@ -19,7 +21,6 @@ Plugin 'vim-scripts/bufkill.vim'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
-Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/Rename2'
 
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -35,10 +36,13 @@ Plugin 'tpope/vim-git'
 
 "Plugin 'fatih/vim-go'
 
+Plugin 'dag/vim2hs'
+
 Plugin 'pangloss/vim-javascript'
 "Plugin 'mmalecki/vim-node.js'
 "Plugin 'kchmck/vim-coffee-script'
-"Plugin 'nono/jquery.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'nono/jquery.vim'
 "Plugin 'briancollins/vim-jst'
 
 Plugin 'othree/html5.vim'
@@ -173,13 +177,6 @@ silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
 
-"colorscheme
-
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_visibility="high"
-set background=dark
-silent! colorscheme solarized
 
 "------------------------------------------------------------------------------
 " filetypes
@@ -199,6 +196,12 @@ au FileType make set noexpandtab
 
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+
+" make C++ follow llvm style
+au FileType cpp set softtabstop=2 tabstop=2 shiftwidth=2 textwidth=79
+
+" make C follow my style
+au FileType c set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " to tab highlight for go
 au FileType go set nolist textwidth=0
@@ -232,6 +235,11 @@ let g:ackprg="ag --nogroup --nocolor --column"
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_auto_loc_list=2
+let g:syntastic_cpp_check_header=1
+let g:syntastic_cpp_include_dirs = ['.']
+let g:syntastic_cpp_auto_refresh_includes=1
+let g:syntastic_cpp_compiler_options=' -std=c++11'
+let g:syntastic_typescript_tsc_args="--jsx" " Allows jxs syntax in ts
 
 """ nerdtree
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
